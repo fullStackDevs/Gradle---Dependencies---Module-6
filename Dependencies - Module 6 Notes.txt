@@ -107,3 +107,4 @@ Dependencies are transitive ---> if we depend on a jar file and that jar file de
 //The downloaded dependencies are cached in "c:\Users\your_user_name\.gradle\caches"
 
 //To refresh the dependencies we could use the "--refresh-dependencies" flag when we run the "gradle build" command
+// EX: gradle clean build --refresh-dependencies
