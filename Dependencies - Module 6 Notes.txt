@@ -108,3 +108,6 @@ Dependencies are transitive ---> if we depend on a jar file and that jar file de
 
 //To refresh the dependencies we could use the "--refresh-dependencies" flag when we run the "gradle build" command
 // EX: gradle clean build --refresh-dependencies
+
+
+// *** Another option to refresh all the dependencies is to delete the cached files from the above mentioned direcotry. This way Gradle will download everything again 
