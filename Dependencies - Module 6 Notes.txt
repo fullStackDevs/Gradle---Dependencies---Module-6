@@ -1,0 +1,103 @@
+
+Project Dependencies:
+---------------------
+
+- Other projects
+- External libraries (on our machine or on an external repository)
+- Internal libraries (company specific maven repo)
+
+
+Dependencies can have many configurations
+------------------------------------------
+
+* We can define our own configurations
+* Different plugins can also define donfiguratios
+
+Java plugin configurations:
+- compile
+- runtime
+- testCompile
+- testRuntime
+
+* Deci putem avea dependinte care sunt folosite la compile, la runtime la testCompile si la testRuntime
+* Dependintele de la compile sunt folosite si la runtime. 
+* runtime este construit pe baza lui compile
+* testRuntime este construit pe baza lui testRuntime
+
+***##*** 
+Dependencies are transitive ---> if we depend on a jar file and that jar file depends on other jar file, the second jar file will also be downloaded
+
+
+* We can list dependenties within a project:
+--------------------------------------------
+
+- We can list all the the dependencies within a project:
+	
+	"gradle -q dependencies"
+
+- We can list the dependencies for a specific configuration:
+
+	"gradle -q dependencies -configuration compile"
+
+//===============================================================
+
+* In Gradle we can use different repositories:
+
+	repositories {
+		mavenCentral()
+	}
+//----------------------------
+	repositories {
+		jcenter() // accesul la acest repository se face folosind https
+	}
+//----------------------------
+	repositories {
+		url "http://jcenter.bintray.com/"   // accesul se face folosind http
+	}
+//----------------------------
+	repositories {
+		mavenLocal()  //Will look in the .m2 directory
+	}
+//----------------------------
+//We can also specify a company repository
+	repositories {
+		maven {
+			url "http://repo.mycompany.com/maven2"
+		}
+	}
+ 
+ //----------------------------
+ // * We can specify multiple repositories:
+ 	repositrories {
+ 		maven {
+ 			url "http://repo.mycompany.com/maven2"
+ 		}
+
+ 		ivy {
+ 			url "http://repo.mycompany.com/repo"
+ 		}
+ 	}
+
+//==========================================================================
+
+//To move away from the file based dependencies:
+
+	1) Add a "repositories" section to the build.gradle file
+
+			repositories {
+				jcenter()
+			}
+
+	2) Specify the dpependencies in the "dependencies" section of the build.gradle file
+		*** On "mvnrepository.com" we can find the details for adding a specific dependency (groupId, artifactId, version)
+		
+			dependencies {
+				//compile files ('lib/log4j-1.2.8.jar', 'lib/junit-3.8.1.jar')
+
+				//We could write the dependency like this but there is an easyer way
+				compile group: 'log4f', name: 'log4j', version '1.2.17'
+
+				//On the same site in the gradle tab we can find this:
+				compile 'junit:jnit:4.12'
+			}
+
